@@ -1,4 +1,5 @@
 <?php
+include_once( '../helper/no-direct-access.php' );
 include_once 'database.php';
 class DoorModel extends Database {
 	
@@ -50,7 +51,7 @@ class DoorModel extends Database {
 			$stmt->execute();
 			$stmt->bind_result( $state );
 			$stmt->fetch();
-			return $state;
+			return $state ? $state : false;
 		}
 		else {
 			return null;
@@ -111,9 +112,6 @@ class DoorModel extends Database {
 			return true;
 		}
 		else {
-			var_dump( $db->error );
-			var_dump( $stmt );
-			die();
 			return false;
 		}
 	}

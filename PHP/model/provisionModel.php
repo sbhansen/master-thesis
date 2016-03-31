@@ -1,4 +1,5 @@
 <?php
+include_once( '../helper/no-direct-access.php' );
 include_once 'database.php';
 class ProvisionModel extends Database {
 	

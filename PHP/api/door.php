@@ -1,7 +1,8 @@
 <?php
-	include_once 'REST.php';
-	include_once '../models/doorModel.php';
-	include_once '../models/logModel.php';
+	include_once '../helper/direct-access-allowed.php';
+
+	include_once '../model/doorModel.php';
+	include_once '../model/logModel.php';
 	
 	switch( $_SERVER['REQUEST_METHOD'] ){
 		case "GET":
@@ -9,8 +10,16 @@
 			$response->success = false;
 			$response->message = "Could not read door";
 			if( isset( $_GET["id"] ) ){
-				$response->success = true;
-				$response->message = DoorModel::getState( $_GET["id"] );
+				$doorId = $_GET["id"];
+				$state = DoorModel::getState( $doorId );
+				if( $state ){
+					$response->success = true;
+					$response->message = $state;
+				}
+				else {
+					$response->success = false;
+					$response->message = "No state for door #$doorId";
+				}
 			}
 			else {
 				$response->message = "No door id given.";
