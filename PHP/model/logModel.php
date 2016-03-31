@@ -1,5 +1,5 @@
 <?php
-include_once 'database.php';
+include_once( '../helper/no-direct-access.php' );
 class LogModel extends Database {
 	
 	/**

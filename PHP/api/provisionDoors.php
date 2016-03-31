@@ -1,6 +1,7 @@
 <?php
-	include_once 'REST.php';
-	include_once '../models/provisionModel.php';
+	include_once '../helper/direct-access-allowed.php';
+	
+	include_once '../model/provisionModel.php';
 	
 	switch( $_SERVER['REQUEST_METHOD'] ){
 		case "GET":
