@@ -2,7 +2,6 @@ import RPi.GPIO as GPIO
 import json
 import time
 import requests
-
 # Configure script
 listenToDoorId         = 0
 listenForSeconds       = 30
@@ -21,6 +20,10 @@ openDoorForState       = "open"
 # @return void
 #
 def listen( doorId, seconds ):
+    if( not doorId in doorPinMapping ):
+        print( "Door %s not valid" % doorId )
+        return
+
     elapsedSeconds = 0
     while elapsedSeconds <= seconds:
         if( shouldOpenDoor( doorId ) ):
@@ -91,7 +94,6 @@ def getDoorState( doorId ):
         return result[ "message" ]
     else:
         return false
-
 
 # Off we go!
 listen( listenToDoorId, listenForSeconds )
